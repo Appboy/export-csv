@@ -10,7 +10,7 @@
         var columns = [],
             line,
             tempLine,
-            csv = "", 
+            csv = "",
             row,
             col,
             options = (this.options.exporting || {}).csv || {},
@@ -25,6 +25,7 @@
 
         each (this.series, function (series) {
             if (series.options.includeInCSVExport !== false) {
+                // X AXIS
                 if (series.xAxis && charttype != "pie") {
                     var xData = series.xData.slice(),
                         xTitle = 'X values';
@@ -39,8 +40,9 @@
                         });
                         xTitle = 'Category';
                     }
-                    if (series.xAxis.axisTitle.text)
+                    if (series.xAxis.axisTitle && series.xAxis.axisTitle.text) {
                         xTitle = series.xAxis.axisTitle.text;
+                    }
                     columns.push(xData);
                     columns[columns.length - 1].unshift(xTitle);
                 } else if (charttype == "pie") {
@@ -48,11 +50,35 @@
                     xData = Highcharts.map(xData, function (x) {
                         return Highcharts.pick(series.data[x].name, x);
                     });
-                    xTitle = series.name;
+                    xTitle = series.chart.title.text;
                     columns.push(xData);
                     columns[columns.length - 1].unshift(xTitle);
                 }
-                columns.push(series.yData.slice());
+
+                // Y AXIS
+                if (charttype != "pie") {
+                  columns.push(series.yData.slice());
+                } else {
+                  var couldTranslateToPercentages = true;
+                  var yData = [];
+                  each (series.points, function (point) {
+                    if (point != null && point.total != null && point.total > 0) {
+                      yData.push(point.y / point.total * 100);
+                    } else {
+                      couldTranslateToPercentages = false;
+                    }
+                  });
+
+                  if (couldTranslateToPercentages) {
+                    columns.push(yData);
+                  } else {
+                    // If we couldn't translate the y data to percentages (eg because the total was 0),
+                    // fall back on the raw y values
+                    columns.push(series.yData.slice());
+                  }
+
+                }
+
                 columns[columns.length - 1].unshift(series.name);
             }
         });

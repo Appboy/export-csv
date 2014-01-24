@@ -18,7 +18,8 @@
             // Options
             dateFormat = options.dateFormat || '%Y-%m-%d %H:%M:%S',
             itemDelimiter = options.itemDelimiter || ',', // use ';' for direct import to Excel
-            lineDelimiter = options.lineDelimeter || '\n';
+            lineDelimiter = options.lineDelimeter || '\n',
+            pieToPercentaje = options.pieToPercentaje || false;
 
         filename = this.title.text;
         charttype = this.options.chart.type;
@@ -56,7 +57,7 @@
                 }
 
                 // Y AXIS
-                if (charttype != "pie") {
+                if (charttype != "pie" || !pieToPercentaje) {
                   columns.push(series.yData.slice());
                 } else {
                   var couldTranslateToPercentages = true;

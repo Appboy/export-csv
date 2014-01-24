@@ -15,7 +15,7 @@ The item delimiter, defaults to `,`. Use `;` for direct import to Excel.
 * `exporting.csv.lineDelimiter`
 The line delimiter, defaults to `\\n`.
 
-* `exporting.csv.pieToPercentaje`
+* `exporting.csv.pieToPercentage`
 Choose if data shown in pie charts should be converted to percentages, defaults to `false`.
 
 * `series.includeInCSVExport`

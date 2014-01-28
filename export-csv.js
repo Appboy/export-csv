@@ -20,7 +20,12 @@
             itemDelimiter = options.itemDelimiter || ',', // use ';' for direct import to Excel
             lineDelimiter = options.lineDelimeter || '\n';
 
-        filename = this.title.text;
+        if (this.title != undefined) {
+          filename = this.title.text;
+        }
+        else {
+          filename = "data";
+        }
         charttype = this.options.chart.type;
 
         each (this.series, function (series) {

@@ -116,7 +116,9 @@
         Highcharts.getOptions().exporting.buttons.contextButton.menuItems.push({
             text: Highcharts.getOptions().lang.downloadCSV || "Download CSV",
             onclick: function () {
-                Highcharts.post('http://www.highcharts.com/studies/csv-export/csv.php', {
+                var _ref;
+                var url = ((_ref = Highcharts.getOptions().exporting.csv) != null ? _ref.url : void 0) || 'http://www.highcharts.com/studies/csv-export/csv.php';
+                Highcharts.post(url, {
                     csv: this.getCSV(),
                     filename: filename
                 });

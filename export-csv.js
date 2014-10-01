@@ -2,8 +2,8 @@
  * A small plugin for getting the CSV of a categorized chart
  */
 (function (Highcharts) {
-    
-    
+
+
     var each = Highcharts.each;
     var filename;
     Highcharts.Chart.prototype.getCSV = function () {
@@ -19,7 +19,7 @@
             dateFormat = options.dateFormat || '%Y-%m-%d %H:%M:%S',
             itemDelimiter = options.itemDelimiter || ',', // use ';' for direct import to Excel
             lineDelimiter = options.lineDelimeter || '\n',
-            pieToPercentage = options.pieToPercentage || false;
+            includePiePercentages = options.includePiePercentages || false;
 
         if (this.title != undefined) {
           filename = this.title.text;
@@ -62,9 +62,8 @@
                 }
 
                 // Y AXIS
-                if (charttype != "pie" || !pieToPercentage) {
-                  columns.push(series.yData.slice());
-                } else {
+                columns.push(series.yData.slice());
+                if (charttype == "pie" && includePiePercentages) {
                   var couldTranslateToPercentages = true;
                   var yData = [];
                   each (series.points, function (point) {
@@ -79,13 +78,20 @@
                     columns.push(yData);
                   } else {
                     // If we couldn't translate the y data to percentages (eg because the total was 0),
-                    // fall back on the raw y values
-                    columns.push(series.yData.slice());
+                    // push a blank into the column
+                    columns.push('');
                   }
 
                 }
 
-                columns[columns.length - 1].unshift(series.name);
+                var dataColumn = columns.length - 1;
+
+                if (includePiePercentages) {
+                  columns[dataColumn].unshift("Percent of Chart");
+                  dataColumn -= 1;
+                }
+
+                columns[dataColumn].unshift(series.name);
             }
         });
 
@@ -108,9 +114,9 @@
     };
 
     // Now we want to add "Download CSV" to the exporting menu. We post the CSV
-    // to a simple PHP script that returns it with a content-type header as a 
+    // to a simple PHP script that returns it with a content-type header as a
     // downloadable file.
-    // The source code for the PHP script can be viewed at 
+    // The source code for the PHP script can be viewed at
     // https://raw.github.com/highslide-software/highcharts.com/master/studies/csv-export/csv.php
     if (Highcharts.getOptions().exporting) {
         Highcharts.getOptions().exporting.buttons.contextButton.menuItems.push({
@@ -126,4 +132,3 @@
         });
     }
 }(Highcharts));
-

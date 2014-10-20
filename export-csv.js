@@ -86,7 +86,7 @@
 
                 var dataColumn = columns.length - 1;
 
-                if (includePiePercentages) {
+                if (charttype == "pie" && includePiePercentages) {
                   columns[dataColumn].unshift("Percent of Chart");
                   dataColumn -= 1;
                 }

@@ -1,6 +1,6 @@
 export-csv
 ==========
-Forked from https://github.com/froodian/export-csv, which was originally forked from https://github.com/highcharts/export-csv.
+**Forked from https://github.com/froodian/export-csv, which was originally forked from https://github.com/highcharts/export-csv.**
 
 This plugin allows the user to export the chart data to a CSV string.
 

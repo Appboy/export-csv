@@ -1,8 +1,10 @@
 export-csv
 ==========
+Forked from https://github.com/froodian/export-csv, which was originally forked from https://github.com/highcharts/export-csv.
+
 This plugin allows the user to export the chart data to a CSV string.
 
-The contents of the plugin is located in the javascript file "export-csv.js". 
+The contents of the plugin is located in the javascript file "export-csv.js".
 This plugin is published under the MIT license, and the license document is included in the repository.
 
 ### Options

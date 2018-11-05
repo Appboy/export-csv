@@ -42,7 +42,7 @@
                         xTitle = 'DateTime';
                     } else if (series.xAxis.categories) {
                         xData = Highcharts.map(xData, function (x) {
-                            return Highcharts.pick(series.xAxis.categories[x], x);
+                            return Highcharts.pick(series.data[x].name, x);
                         });
                         xTitle = 'Category';
                     }
@@ -122,8 +122,13 @@
         Highcharts.getOptions().exporting.buttons.contextButton.menuItems.push({
             text: Highcharts.getOptions().lang.downloadCSV || "Download CSV",
             onclick: function () {
-                var _ref;
-                var url = ((_ref = Highcharts.getOptions().exporting.csv) != null ? _ref.url : void 0) || 'http://www.highcharts.com/studies/csv-export/csv.php';
+                var ref, ref1, url;
+                if ((ref = Highcharts.getOptions().exporting.csv) != null) {
+                  if (typeof ref.beforeDownloadCSV === "function") {
+                    ref.beforeDownloadCSV();
+                  }
+                }
+                url = ((ref1 = Highcharts.getOptions().exporting.csv) != null ? ref1.url : void 0) || 'http://www.highcharts.com/studies/csv-export/csv.php';
                 Highcharts.post(url, {
                     csv: this.getCSV(),
                     filename: filename

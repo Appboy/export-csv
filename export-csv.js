@@ -129,12 +129,13 @@
                     }
                 }
                 url = ((ref1 = Highcharts.getOptions().exporting.csv) != null ? ref1.url : void 0);
-                if (url != null) {
-                    Highcharts.post(url, {
-                        csv: this.getCSV(),
-                        filename: filename
-                    });
+                if (url == null) {
+                    throw new Error("You must include an exporting URL")
                 }
+                Highcharts.post(url, {
+                    csv: this.getCSV(),
+                    filename: filename
+                });
             }
         });
     }

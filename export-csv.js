@@ -130,7 +130,7 @@
                 }
                 url = ((ref1 = Highcharts.getOptions().exporting.csv) != null ? ref1.url : void 0);
                 if (url == null) {
-                    throw new Error("You must include an exporting URL")
+                    throw new Error("You must include an export URL")
                 }
                 Highcharts.post(url, {
                     csv: this.getCSV(),

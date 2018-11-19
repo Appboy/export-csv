@@ -124,15 +124,17 @@
             onclick: function () {
                 var ref, ref1, url;
                 if ((ref = Highcharts.getOptions().exporting.csv) != null) {
-                  if (typeof ref.beforeDownloadCSV === "function") {
-                    ref.beforeDownloadCSV();
-                  }
+                    if (typeof ref.beforeDownloadCSV === "function") {
+                        ref.beforeDownloadCSV();
+                    }
                 }
-                url = ((ref1 = Highcharts.getOptions().exporting.csv) != null ? ref1.url : void 0) || 'http://www.highcharts.com/studies/csv-export/csv.php';
-                Highcharts.post(url, {
-                    csv: this.getCSV(),
-                    filename: filename
-                });
+                url = ((ref1 = Highcharts.getOptions().exporting.csv) != null ? ref1.url : void 0);
+                if (url != null) {
+                    Highcharts.post(url, {
+                        csv: this.getCSV(),
+                        filename: filename
+                    });
+                }
             }
         });
     }

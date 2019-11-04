@@ -1,27 +1,19 @@
 {
     "name": "export-csv",
     "version": "1.0.4",
-    "title": "Export Chart Data To CSV",
-    "demo": [
-        "http://jsfiddle.net/highcharts/cqjvD/",
-        "http://jsfiddle.net/highcharts/2Jyn5/"
-    ],
+    "description": "Export Chart Data To CSV",
+    "main": "export-csv.js",
     "author": {
         "name": "Torstein Hønsi",
         "url": "https://github.com/highslide-software"
     },
-    "licenses": [
-        {
-            "type": "MIT",
-            "url": "https://github.com/highslide-software/export-csv/blob/master/LICENSE"
-        }
-    ],
+    "license": "MIT",
     "description": "This feature allows the user to export the chart data to a csv file.",
     "keywords": [
      "export",
      "csv"
     ],
-    "dependencies": {
+    "peerDependencies": {
         "highcharts": ">=3.0.0"
     }
 }

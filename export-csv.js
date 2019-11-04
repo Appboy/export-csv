@@ -1,9 +1,9 @@
 /**
  * A small plugin for getting the CSV of a categorized chart
+ *
+ * From https://github.com/Appboy/export-csv, which is our fork of https://github.com/highslide-software/export-csv
  */
-(function (Highcharts) {
-
-
+module.exports = function setupExportCsv(Highcharts) {
     var each = Highcharts.each;
     var filename;
     Highcharts.Chart.prototype.getCSV = function () {
@@ -139,4 +139,4 @@
             }
         });
     }
-}(Highcharts));
+}
